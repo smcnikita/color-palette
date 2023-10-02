@@ -9,9 +9,9 @@ const notify = () => {
 
 <template>
   <main class="h-screen grid grid-cols-none grid-rows-3 md:grid-cols-3 md:grid-rows-none">
-    <BaseCol @toast="notify" />
-    <BaseCol @toast="notify" />
-    <BaseCol @toast="notify" />
+    <BaseCol index="1" @toast="notify" />
+    <BaseCol index="2" @toast="notify" />
+    <BaseCol index="3" @toast="notify" />
   </main>
 </template>
 
