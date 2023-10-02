@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import BaseCol from '@/components/BaseCol.vue';
+import showNotify from '@/utils/notify';
+
+const notify = () => {
+  showNotify('Color copied to the clipboard!');
+};
 </script>
 
 <template>
-  <main class="main">
-    <BaseCol />
-    <BaseCol />
-    <BaseCol />
+  <main class="h-screen grid grid-cols-none grid-rows-3 md:grid-cols-3 md:grid-rows-none">
+    <BaseCol @toast="notify" />
+    <BaseCol @toast="notify" />
+    <BaseCol @toast="notify" />
   </main>
 </template>
 
-<style scoped>
-.main {
-  height: 100vh;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-}
-</style>
+<style scoped></style>
