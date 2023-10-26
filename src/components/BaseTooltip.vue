@@ -17,6 +17,7 @@
     :isShowPopper="isShowPopper"
     @new-colors="$emit('newColors')"
     @clear="$emit('clear')"
+    @change-grid="$emit('changeGrid', $event)"
   />
 </template>
 
@@ -28,6 +29,12 @@ import IconsRefresh from './icons/IconsRefresh.vue';
 import IconsSettings from './icons/IconsSettings.vue';
 import BasePopper from './BasePopper.vue';
 import { onClickOutside } from '@vueuse/core';
+
+defineEmits<{
+  (e: 'newColors'): void;
+  (e: 'clear'): void;
+  (e: 'changeGrid', value: 3 | 5): void;
+}>();
 
 const target = ref(null);
 const isShowPopper = ref(false);
@@ -43,11 +50,6 @@ onClickOutside(target, (event: PointerEvent) => {
     isShowPopper.value = false;
   }
 });
-
-defineEmits<{
-  (e: 'newColors'): void;
-  (e: 'clear'): void;
-}>();
 </script>
 
 <style scoped>

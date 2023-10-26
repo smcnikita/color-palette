@@ -16,7 +16,9 @@
     grid-template-columns: none;
     grid-template-rows: repeat(3, 1fr);
   }
+}
 
+@media screen and (max-width: 1000px) {
   .grid__5 {
     grid-template-columns: none;
     grid-template-rows: repeat(5, 1fr);

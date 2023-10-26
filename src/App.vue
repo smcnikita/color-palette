@@ -14,6 +14,10 @@ const countTransform = computed(() => {
   return arr;
 });
 
+const changeCount = (value: 3 | 5) => {
+  count.value = value;
+};
+
 const notify = () => {
   showNotify('Color copied to the clipboard!');
 };
@@ -29,7 +33,11 @@ const clear = () => {
 
 <template>
   <main
-    class="main grid h-screen grid grid__3 grid-cols-none grid-rows-3 md:grid-cols-3 md:grid-rows-none"
+    class="main grid h-screen grid"
+    :class="{
+      grid__3: count === 3,
+      grid__5: count === 5,
+    }"
   >
     <BaseCol
       v-for="item in countTransform"
@@ -38,13 +46,13 @@ const clear = () => {
       :index="item.toString()"
       @toast="notify"
     />
-    <BaseTooltip @new-colors="getNewColors" @clear="clear" />
+    <BaseTooltip @new-colors="getNewColors" @clear="clear" @change-grid="changeCount" />
   </main>
 </template>
 
 <style scoped>
 .main {
-  height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 </style>

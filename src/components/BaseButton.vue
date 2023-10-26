@@ -27,7 +27,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (props.message) {
+  if (button.value && props.message) {
     (button.value as ReferenceElement)._tippy?.destroy();
   }
 });

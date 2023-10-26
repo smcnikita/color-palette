@@ -1,8 +1,8 @@
 <template>
   <Transition>
     <div v-if="isShowPopper" class="popper">
-      <!-- <button class="popper__button" @click.prevent="$emit('changeGrid', 3)">3 color grid</button> -->
-      <!-- <button class="popper__button" @click.prevent="$emit('changeGrid', 5)">5 color grid</button> -->
+      <button class="popper__button" @click.prevent="$emit('changeGrid', 3)">3 color grid</button>
+      <button class="popper__button" @click.prevent="$emit('changeGrid', 5)">5 color grid</button>
       <button class="popper__button" @click.prevent="$emit('newColors')">new colors</button>
       <button class="popper__button" @click.prevent="$emit('clear')">clear</button>
     </div>
@@ -32,7 +32,7 @@ defineEmits<{
   flex-direction: column;
   gap: 10px;
 
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.7);
 
   width: 140px;
 
