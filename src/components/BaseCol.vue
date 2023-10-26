@@ -1,33 +1,28 @@
 <template>
   <div class="col">
-    <button
-      type="button"
-      class="ml-3 mt-3 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
-      data-tooltip-target="tooltip-default"
-      @click="onClick"
-    >
-      {{ color }}
-    </button>
-    <button
-      type="button"
-      class="ml-3 mt-3 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-      @click="toggleLock"
-    >
-      <template v-if="isSave">unlock</template>
-      <template v-else>lock</template>
-    </button>
-    <button
-      type="button"
-      class="ml-3 mt-3 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-      :disabled="isSave"
-      @click="getNewColor"
-    >
-      update
-    </button>
+    <div class="col_wrapper">
+      <BaseButton message="copy" @click="onClick">
+        {{ color }}
+      </BaseButton>
+      <BaseButton @click="toggleLock">
+        <BaseIcon :fill="isSave ? '#CD5D7D' : '#232323'">
+          <template v-if="isSave">
+            <IconsLikeFill />
+          </template>
+          <template v-else>
+            <IconsLike />
+          </template>
+        </BaseIcon>
+      </BaseButton>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseIcon from './BaseIcon.vue';
+import IconsLikeFill from './icons/IconsLikeFill.vue';
+import IconsLike from './icons/IconsLike.vue';
+import BaseButton from './BaseButton.vue';
 import { onMounted, ref } from 'vue';
 import { generateColor } from '@/utils/color';
 import { copyToClipboad } from '@/utils';
@@ -58,8 +53,9 @@ const toggleLock = () => {
   }
 };
 
-const getNewColor = () => {
-  initColor();
+const clear = () => {
+  localStorage.removeItem(`color-${props.index}`);
+  isSave.value = false;
 };
 
 const initColor = () => {
@@ -76,10 +72,20 @@ const initColor = () => {
 onMounted(() => {
   initColor();
 });
+
+defineExpose({ initColor, clear });
 </script>
 
 <style scoped>
 .col {
   background-color: v-bind(color);
+}
+
+.col_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 8px;
 }
 </style>

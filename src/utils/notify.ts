@@ -6,6 +6,6 @@ export default function showNotify(text: string) {
     closeButton: false,
     autoClose: 1000,
     transition: 'flip',
-    position: 'bottom-right',
+    position: 'bottom-left',
   });
 }

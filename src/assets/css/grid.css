@@ -1,0 +1,24 @@
+.grid {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.grid__3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid__5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media screen and (max-width: 600px) {
+  .grid__3 {
+    grid-template-columns: none;
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .grid__5 {
+    grid-template-columns: none;
+    grid-template-rows: repeat(5, 1fr);
+  }
+}
