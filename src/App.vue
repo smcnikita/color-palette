@@ -33,7 +33,7 @@ const clear = () => {
 
 <template>
   <main
-    class="main grid h-screen grid"
+    class="main grid"
     :class="{
       grid__3: count === 3,
       grid__5: count === 5,
@@ -46,7 +46,12 @@ const clear = () => {
       :index="item.toString()"
       @toast="notify"
     />
-    <BaseTooltip @new-colors="getNewColors" @clear="clear" @change-grid="changeCount" />
+    <BaseTooltip
+      :count="count"
+      @new-colors="getNewColors"
+      @clear="clear"
+      @change-grid="changeCount"
+    />
   </main>
 </template>
 

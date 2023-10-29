@@ -1,17 +1,37 @@
 <template>
   <Transition>
     <div v-if="isShowPopper" class="popper">
-      <button class="popper__button" @click.prevent="$emit('changeGrid', 3)">3 color grid</button>
-      <button class="popper__button" @click.prevent="$emit('changeGrid', 5)">5 color grid</button>
+      <button
+        class="popper__button"
+        @click.prevent="$emit('changeGrid', 3)"
+        @mouseenter="onMouseenter(3)"
+        @mouseleave="onMouseleave"
+      >
+        3 color grid
+      </button>
+      <button
+        class="popper__button"
+        @click.prevent="$emit('changeGrid', 5)"
+        @mouseenter="onMouseenter(5)"
+        @mouseleave="onMouseleave"
+      >
+        5 color grid
+      </button>
       <button class="popper__button" @click.prevent="$emit('newColors')">new colors</button>
       <button class="popper__button" @click.prevent="$emit('clear')">clear</button>
     </div>
   </Transition>
+
+  <ViewDridOnHover :defaultCount="count" :count="countOnHover" :isShow="isShowGrid" />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import ViewDridOnHover from './ViewDridOnHover.vue';
+
 defineProps<{
   isShowPopper: boolean;
+  count: 3 | 5;
 }>();
 
 defineEmits<{
@@ -19,6 +39,18 @@ defineEmits<{
   (e: 'newColors'): void;
   (e: 'clear'): void;
 }>();
+
+const countOnHover = ref<3 | 5>(3);
+const isShowGrid = ref(false);
+
+const onMouseenter = (value: 3 | 5) => {
+  countOnHover.value = value;
+  isShowGrid.value = true;
+};
+
+const onMouseleave = () => {
+  isShowGrid.value = false;
+};
 </script>
 
 <style scoped>
@@ -39,6 +71,8 @@ defineEmits<{
   padding: 4px 0;
 
   border-radius: 10px;
+
+  z-index: 2;
 }
 
 .popper__button {
