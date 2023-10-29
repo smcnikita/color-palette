@@ -14,6 +14,7 @@
 
   <BasePopper
     ref="target"
+    :count="count"
     :isShowPopper="isShowPopper"
     @new-colors="$emit('newColors')"
     @clear="$emit('clear')"
@@ -29,6 +30,8 @@ import IconsRefresh from './icons/IconsRefresh.vue';
 import IconsSettings from './icons/IconsSettings.vue';
 import BasePopper from './BasePopper.vue';
 import { onClickOutside } from '@vueuse/core';
+
+defineProps<{ count: 3 | 5 }>();
 
 defineEmits<{
   (e: 'newColors'): void;
@@ -67,5 +70,7 @@ onClickOutside(target, (event: PointerEvent) => {
   border-radius: 10px;
 
   padding: 8px 10px;
+
+  z-index: 2;
 }
 </style>
